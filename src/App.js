@@ -25,22 +25,20 @@ function App() {
       });
   }
 
-  const getSearchedMovies = () => {
-    axios.get(SEARCHAPI + search)
-      .then(response => {
-        setMovies(response.data.results);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
   useEffect(() => {
     setMovies([]);
+    
     if (search === "") {
       getAllMovies();
     } else {
-      getSearchedMovies();
+      // Move getSearchedMovies logic here
+      axios.get(SEARCHAPI + search)
+        .then(response => {
+          setMovies(response.data.results);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }, [search]);
 
